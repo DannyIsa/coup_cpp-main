@@ -1,0 +1,78 @@
+# Valgrind suppression file for NVIDIA driver leaks
+# These are not application bugs but driver issues
+
+{
+   nvidia_driver_leak_1
+   Memcheck:Leak
+   match-leak-kinds: definite
+   ...
+   obj:*/libnvidia-glcore.so*
+}
+
+{
+   nvidia_driver_leak_2
+   Memcheck:Leak
+   match-leak-kinds: definite
+   ...
+   obj:*/libGLX_nvidia.so*
+}
+
+{
+   nvidia_driver_leak_3
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   ...
+   obj:*/libnvidia-glcore.so*
+}
+
+{
+   nvidia_driver_leak_4
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   ...
+   obj:*/libGLX_nvidia.so*
+}
+
+{
+   nvidia_malloc_zero_size
+   Memcheck:Cond
+   fun:realloc
+   ...
+   obj:*/libnvidia-glcore.so*
+}
+
+{
+   nvidia_posix_memalign_zero
+   Memcheck:Param
+   posix_memalign(size)
+   ...
+   obj:*/libnvidia-glcore.so*
+}
+
+{
+   nvidia_glx_context_creation
+   Memcheck:Leak
+   match-leak-kinds: definite,indirect
+   ...
+   fun:glXCreateContextAttribsARB
+}
+
+{
+   nvidia_dl_init
+   Memcheck:Leak
+   match-leak-kinds: definite,indirect
+   ...
+   fun:_dl_init
+   ...
+   obj:*/libnvidia-glcore.so*
+}
+
+{
+   nvidia_dl_init_glx
+   Memcheck:Leak
+   match-leak-kinds: definite,indirect
+   ...
+   fun:_dl_init
+   ...
+   obj:*/libGLX_nvidia.so*
+} 
