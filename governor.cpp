@@ -1,7 +1,8 @@
 // daniisakov@gmail.com
 
 #include "governor.hpp"
-
+#include <stdexcept>
+#include <algorithm>
 Governor::Governor(Game &game, string name) : Player(game, name) {}
 
 void Governor::tax() {
@@ -17,7 +18,7 @@ void Governor::cancelTax(Player &target) {
   game.validateTarget(target);
 
   if (target.getLastAction() != ActionType::TAX) {
-    throw invalid_argument("Target's last action was not tax");
+    throw std::invalid_argument("Target's last action was not tax");
   }
 
   if (target.getCoins() >= 2) {
