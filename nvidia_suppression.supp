@@ -34,7 +34,7 @@
 }
 
 {
-   nvidia_malloc_zero_size
+   nvidia_realloc_zero_size
    Memcheck:Cond
    fun:realloc
    ...
@@ -45,6 +45,7 @@
    nvidia_posix_memalign_zero
    Memcheck:Param
    posix_memalign(size)
+   fun:posix_memalign
    ...
    obj:*/libnvidia-glcore.so*
 }
@@ -55,10 +56,11 @@
    match-leak-kinds: definite,indirect
    ...
    fun:glXCreateContextAttribsARB
+   obj:*/libGLX_nvidia.so*
 }
 
 {
-   nvidia_dl_init
+   nvidia_dl_init_glcore
    Memcheck:Leak
    match-leak-kinds: definite,indirect
    ...
@@ -73,6 +75,80 @@
    match-leak-kinds: definite,indirect
    ...
    fun:_dl_init
+   ...
+   obj:*/libGLX_nvidia.so*
+}
+
+{
+   nvidia_dlopen_worker
+   Memcheck:Leak
+   match-leak-kinds: definite,indirect
+   ...
+   fun:dl_open_worker
+   ...
+   obj:*/libnvidia-glcore.so*
+}
+
+{
+   nvidia_dlopen_worker_glx
+   Memcheck:Leak
+   match-leak-kinds: definite,indirect
+   ...
+   fun:dl_open_worker
+   ...
+   obj:*/libGLX_nvidia.so*
+}
+
+{
+   nvidia_malloc_any
+   Memcheck:Leak
+   match-leak-kinds: definite,indirect
+   fun:malloc
+   ...
+   obj:*/libnvidia-glcore.so*
+}
+
+{
+   nvidia_calloc_any
+   Memcheck:Leak
+   match-leak-kinds: definite,indirect
+   fun:calloc
+   ...
+   obj:*/libnvidia-glcore.so*
+}
+
+{
+   nvidia_realloc_any
+   Memcheck:Leak
+   match-leak-kinds: definite,indirect
+   fun:realloc
+   ...
+   obj:*/libnvidia-glcore.so*
+}
+
+{
+   nvidia_glx_malloc_any
+   Memcheck:Leak
+   match-leak-kinds: definite,indirect
+   fun:malloc
+   ...
+   obj:*/libGLX_nvidia.so*
+}
+
+{
+   nvidia_glx_calloc_any
+   Memcheck:Leak
+   match-leak-kinds: definite,indirect
+   fun:calloc
+   ...
+   obj:*/libGLX_nvidia.so*
+}
+
+{
+   nvidia_glx_realloc_any
+   Memcheck:Leak
+   match-leak-kinds: definite,indirect
+   fun:realloc
    ...
    obj:*/libGLX_nvidia.so*
 } 

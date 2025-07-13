@@ -45,4 +45,4 @@ valgrind-no-suppress: Main
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./Main
 
 clean:
-	rm -f *.o Main test main nvidia_suppression.supp 
+	rm -f *.o Main test main 
