@@ -35,8 +35,8 @@ spy.o: spy.cpp
 test: test_coup.cpp game.o player.o governor.o baron.o general.o judge.o merchant.o spy.o
 	g++ -std=c++17 -o test test_coup.cpp game.o player.o governor.o baron.o general.o judge.o merchant.o spy.o
 
-valgrind: Main
-	valgrind --leak-check=full --suppressions=nvidia_suppression.supp ./Main
+valgrind: test
+	valgrind --leak-check=full --suppressions=nvidia_suppression.supp ./test
 
 valgrind-detailed: Main
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=nvidia_suppression.supp ./Main
